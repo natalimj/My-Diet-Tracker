@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "777761679678",
+    "project_id": "my-diet-tracker-df3df",
+    "storage_bucket": "my-diet-tracker-df3df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777761679678:android:2b829c7f684c374834e46f",
+        "android_client_info": {
+          "package_name": "com.natali.mydiettracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777761679678-0ied3761npkb5beri2mrn6f5tqe1sg8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.natali.mydiettracker",
+            "certificate_hash": "1a663dcf3d13410d59ad6e68f44f3c43d1051a50"
+          }
+        },
+        {
+          "client_id": "777761679678-l91s8s66putc9lunkss7vijil8t01g2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWpGgvvtNOQAoAO4mJsyWsJN48aSDvLb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777761679678-l91s8s66putc9lunkss7vijil8t01g2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
