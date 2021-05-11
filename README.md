@@ -26,7 +26,6 @@ MUST HAVE
 
 •	As a user, I want to add my daily meals with their calories by using the food database.
 
-•	As a user, I want to add new food with its calorie to the food database.
 
 SHOULD HAVE
 
