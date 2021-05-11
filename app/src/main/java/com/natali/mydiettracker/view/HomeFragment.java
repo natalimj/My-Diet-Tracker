@@ -11,47 +11,69 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.natali.mydiettracker.R;
-import com.natali.mydiettracker.data.entry.EntryAdapter;
-import com.natali.mydiettracker.model.Entry;
 import com.natali.mydiettracker.viewmodel.HomeViewModel;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import com.natali.mydiettracker.viewmodel.PlanViewModel;
 
 public class HomeFragment extends Fragment implements View.OnClickListener  {
 
     private HomeViewModel homeViewModel;
+    private PlanViewModel planViewModel;
 
     CardView card1;
     CardView card2;
     CardView card3;
     CardView card4;
-    CardView card5;
-    CardView card6;
+    TextView textView;
+    TextView textView2;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        planViewModel = new ViewModelProvider(this).get(PlanViewModel.class);
 
+
+        //TODO: change names in home page
         card1=root.findViewById(R.id.cardView1);
         card2=root.findViewById(R.id.cardView2);
         card3=root.findViewById(R.id.cardView3);
         card4=root.findViewById(R.id.cardView4);
-        card5=root.findViewById(R.id.cardView5);
-        card6=root.findViewById(R.id.cardView6);
 
         card1.setOnClickListener(this);
         card2.setOnClickListener(this);
         card3.setOnClickListener(this);
         card4.setOnClickListener(this);
-        card5.setOnClickListener(this);
-        card6.setOnClickListener(this);
+
+        textView=root.findViewById(R.id.textView);
+        textView2=root.findViewById(R.id.textTarget);
+
+        planViewModel.getDailyCalories().observe(getViewLifecycleOwner(), calorie->
+        {
+            if(calorie==null||calorie==0){
+                System.out.println("set new values");
+                textView.setText("CREATE DIET PLAN");
+
+            }
+            else {
+                textView.setText("TARGET DAILY CALORIES: "+calorie.toString());
+                System.out.println("daily calories: "+ calorie.toString());
+            }
+
+        });
+
+
+        planViewModel.getTargetWeight().observe(getViewLifecycleOwner(),target->
+        {
+            if(target==null||target==0){
+                textView2.setText("AND START");
+            }
+            else {
+               textView2.setText("TARGET WEIGHT: "+String.format("%.1f", target));
+            }
+        });
+
 
         return root;
     }
@@ -62,31 +84,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         Fragment fragment = null;
         switch (view.getId()) {
             case R.id.cardView1:
-                fragment = new FoodFragment();
+                fragment = new EntryFragment();
                 replaceFragment(fragment);
                 break;
 
             case R.id.cardView2:
-                fragment = new ExerciseFragment();
-                replaceFragment(fragment);
-                break;
-
-            case R.id.cardView3:
-                fragment = new WaterFragment();
-                replaceFragment(fragment);
-                break;
-
-            case R.id.cardView4:
                 fragment = new ProgressFragment();
                 replaceFragment(fragment);
                 break;
 
-            case R.id.cardView5:
+            case R.id.cardView3:
                 fragment = new PlanFragment();
                 replaceFragment(fragment);
                 break;
 
-            case R.id.cardView6:
+            case R.id.cardView4:
                 fragment = new DiaryFragment();
                 replaceFragment(fragment);
                 break;

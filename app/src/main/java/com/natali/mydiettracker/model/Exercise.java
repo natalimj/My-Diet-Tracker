@@ -17,7 +17,6 @@ public class Exercise {
         this.calorie = calorie;
     }
 
-
     public String getExerciseName() {
         return exerciseName;
     }

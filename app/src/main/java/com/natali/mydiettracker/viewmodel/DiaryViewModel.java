@@ -44,8 +44,6 @@ public class DiaryViewModel extends AndroidViewModel {
             return userInfoRepository.getCalorie();
         }
 
-
-
     public LiveData<Double> getTotalFoodCalories(String date){
         return  entryRepository.totalFoodCalories(date);
     }
@@ -53,7 +51,6 @@ public class DiaryViewModel extends AndroidViewModel {
     public  LiveData<Double> getTotalExerciseCalories(String date){
         return entryRepository.totalExerciseCalories(date);
     }
-
 
     public MutableLiveData<String> getSelectedDate() {
         return selectedDate;

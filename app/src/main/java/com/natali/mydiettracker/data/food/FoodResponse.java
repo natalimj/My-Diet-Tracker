@@ -21,10 +21,7 @@ public class FoodResponse {
         private double calories;
     }
 
-
     public Food getFood() {
-
         return new Food(items.get(0).name, items.get(0).calories);
-
     }
 }

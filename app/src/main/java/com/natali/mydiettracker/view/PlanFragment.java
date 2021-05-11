@@ -18,7 +18,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.natali.mydiettracker.viewmodel.MainActivityViewModel;
 import com.natali.mydiettracker.R;
 import com.natali.mydiettracker.model.UserInfo;
 import com.natali.mydiettracker.viewmodel.PlanViewModel;
@@ -26,7 +25,6 @@ import com.natali.mydiettracker.viewmodel.PlanViewModel;
 public class PlanFragment extends Fragment {
 
     private PlanViewModel planViewModel;
-    private MainActivityViewModel mainActivityViewModel;
 
     private EditText age;
     private EditText weight;
@@ -36,10 +34,7 @@ public class PlanFragment extends Fragment {
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private Spinner spinner;
-    private LinearLayout linearLayout;
-    private LinearLayout linearLayout2;
     private AppCompatButton button;
-    private AppCompatButton button2;
     private  int ageValue;
     private int weightValue;
     private int heightValue;
@@ -54,10 +49,7 @@ public class PlanFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_plan, container, false);
         planViewModel = new ViewModelProvider(this).get(PlanViewModel.class);
-        mainActivityViewModel=new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-        linearLayout=root.findViewById(R.id.planLayout);
-        linearLayout2=root.findViewById(R.id.planLayout2);
         age=root.findViewById(R.id.age);
         weight=root.findViewById(R.id.startWeight);
         height=root.findViewById(R.id.height);
@@ -66,9 +58,7 @@ public class PlanFragment extends Fragment {
         dailyCalories=root.findViewById(R.id.dailyCalorieText);
         spinner=root.findViewById(R.id.spinner);
 
-
         button=root.findViewById(R.id.addUserInfo);
-        button2=root.findViewById(R.id.addNewUserInfo);
         radioGroup=root.findViewById(R.id.radioGender);
 
 
@@ -81,7 +71,6 @@ public class PlanFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                //idealWeight.setText(parent.getSelectedItem().toString());
                 activityLevel=parent.getSelectedItem().toString();
             }
             @Override
@@ -99,23 +88,11 @@ public class PlanFragment extends Fragment {
                     addUserInfo();
                     validPlan=true;
                 }
-                 else{
+                else{
                     updateUserInfo();
                 }
             }
         });
-
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linearLayout2.setVisibility(View.INVISIBLE);
-                linearLayout.setVisibility(View.VISIBLE);
-                System.out.println("set new values");
-                validPlan=true;
-            }
-        });
-
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -124,45 +101,42 @@ public class PlanFragment extends Fragment {
                 radioButton= root.findViewById(selectedId);
                 switch(radioButton.getId()) {
                     case R.id.radioMale:
-                            gender="male";
-                            break;
+                        gender="male";
+                        break;
                     case R.id.radioFemale:
-                           gender="female";
-                            break;
+                        gender="female";
+                        break;
                 }
             }
         });
 
         planViewModel.getDailyCalories().observe(getViewLifecycleOwner(), calorie->
         {
-            if(calorie==null||calorie==0){
-                linearLayout2.setVisibility(View.INVISIBLE);
-               linearLayout.setVisibility(View.VISIBLE);
-              System.out.println("set new values");
+
+             if(calorie==null||calorie==0){
+               validPlan=false;
             }
             else {
-
-             linearLayout.setVisibility(View.INVISIBLE);
-             linearLayout2.setVisibility(View.VISIBLE);
-             dailyCalories.setVisibility(View.VISIBLE);
-                dailyCalories.setText( calorie.toString());
-                System.out.println("daily calories: "+ calorie.toString());
+               validPlan=true;
+               dailyCalories.setText("DAILY CALORIES:" +calorie.toString());
             }
 
         });
 
+
         planViewModel.getTargetWeight().observe(getViewLifecycleOwner(),target->
         {
             if(target==null||target==0){
-                System.out.println("do something there target");
+                System.out.println("there is no plan");
             }
             else {
-                idealWeight.setText(String.format("%.1f", target));
+                idealWeight.setText("TARGET WEIGHT: "+String.format("%.1f", target));
             }
         });
 
         return root;
     }
+
 
     public void addUserInfo(){
 
@@ -172,19 +146,6 @@ public class PlanFragment extends Fragment {
     public void updateUserInfo(){
         planViewModel.updateUserInfo(new UserInfo("userId",gender,ageValue,weightValue,0,heightValue,activityLevel,0));
         System.out.println("User plan is updated!");
-    }
-
-    public void setView(View view){
-        if(validPlan==true){
-            linearLayout.setVisibility(View.INVISIBLE);
-            linearLayout2.setVisibility(View.VISIBLE);
-            dailyCalories.setVisibility(View.VISIBLE);
-        }
-        else{
-            linearLayout2.setVisibility(View.INVISIBLE);
-            linearLayout.setVisibility(View.VISIBLE);
-            System.out.println("set new values");
-        }
     }
 
 }

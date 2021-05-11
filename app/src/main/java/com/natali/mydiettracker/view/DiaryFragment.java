@@ -52,7 +52,7 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
 
     ArrayList<Entry> foodList = new ArrayList<>();
     ArrayList<Entry> exerciseList = new ArrayList<>();
-    ArrayList<Entry> entries=new ArrayList<>();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
@@ -81,7 +81,6 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
         diaryViewModel.setSelectedDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 
         updateView();
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,11 +101,7 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
         String strDate = format.format(calendar.getTime());
         diaryViewModel.setSelectedDate(strDate);
         updateView();
-
     }
-
-
-
 
     public void updateView(){
         food.setText("");
@@ -120,10 +115,8 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
             }
         });
 
-
         diaryViewModel.getWeight().observe(getViewLifecycleOwner(),new Observer<Entry>() {
             public void onChanged(@Nullable Entry entry) {
-
                 if(entry!=null){
                     weight.setText(String.valueOf(entry.getCalorie()));
                 }
@@ -134,14 +127,12 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
             }
         });
 
-
         diaryViewModel.getFoodsForUser().observe(getViewLifecycleOwner(), new Observer<List<Entry>>() {
             public void onChanged(@Nullable List<Entry> entries) {
                 if (entries != null) {
                     foodList.clear();
                     for (Entry entry : entries) {
                         foodList.add(entry);
-                        System.out.println(entry.getName());
                     }
                     entryAdapter = new EntryAdapter(foodList);
                     recyclerView.setAdapter(entryAdapter);
@@ -178,39 +169,24 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
             }
         });
 
-        diaryViewModel.getDailyCalories().observe(getViewLifecycleOwner(), new Observer<Integer>(){
-            public void onChanged(@Nullable Integer calorie) {
-                System.out.println(calorie.toString());
-                totalCal=Double.valueOf(calorie);
-                System.out.println("total1: "+totalCal);
-             //   textUserInfo.setText(totalCal+ " CALORIES LEFT FOR TODAY");
-            }
-        });
 
-        diaryViewModel.getTotalFoodCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), new Observer<Double>(){
-            public void onChanged(@Nullable Double foodCalorie) {
+        // find how many calories are left for today : TARGET CALORIES - FOOD + EXERCISE
+        diaryViewModel.getDailyCalories().observe(getViewLifecycleOwner(), calorie-> {
+            totalCal=Double.valueOf(calorie);
+            diaryViewModel.getTotalFoodCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), foodCalorie-> {
                 if(foodCalorie!=null) {
-                    System.out.println("f--" + foodCalorie.toString());
                     foodCal = Double.valueOf(foodCalorie);
-                    totalCal = totalCal - foodCalorie;
-                    System.out.println("total2: " + totalCal);
                 }
-            }
-        });
-
-        diaryViewModel.getTotalExerciseCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), new Observer<Double>(){
-            public void onChanged(@Nullable Double exerciseCalorie) {
-                if(exerciseCalorie!=null) {
-                    System.out.println("e--" + exerciseCalorie.toString());
-                    exerciseCalorie = Double.valueOf(exerciseCalorie);
-                    totalCal = totalCal + exerciseCalorie;
-                    System.out.println("total3: " + totalCal);
-                }
-                if(strDate.equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(new Date())))
-                textUserInfo.setText("TARGET CALORIES - FOOD + EXERCISE=\n"+totalCal+ "\n CALORIES LEFT FOR TODAY");
-                else
-                textUserInfo.setText("");
-            }
+                diaryViewModel.getTotalExerciseCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), exerciseCalorie->{
+                    if(exerciseCalorie!=null) {
+                        exerciseCal=Double.valueOf(exerciseCalorie);
+                        if(strDate.equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(new Date())))
+                            textUserInfo.setText("TARGET CALORIES - FOOD + EXERCISE=\n"+(totalCal+exerciseCal-foodCal)+ "\n CALORIES LEFT FOR TODAY");
+                        else
+                            textUserInfo.setText("");
+                    }
+                });
+            });
         });
 
     }

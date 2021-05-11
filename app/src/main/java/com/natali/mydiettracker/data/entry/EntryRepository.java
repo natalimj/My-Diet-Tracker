@@ -46,7 +46,6 @@ public class EntryRepository {
         this.selectedDate = selectedDate;
     }
 
-    //for given date
 
     public LiveData<List<Entry>> getFoodsForGivenDate(String date){
         return entryDao.getAllFoodsForUser(userId,date);
@@ -74,10 +73,6 @@ public class EntryRepository {
 
     public void update(Entry entry) {
         executorService.execute(() -> entryDao.update(entry));
-    }
-
-    public void deleteAllEntries() {
-        executorService.execute(entryDao::deleteAllEntries);
     }
 
     public String getUserId() {

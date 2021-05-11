@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_diary, R.id.nav_food,R.id.nav_exercise,R.id.nav_water)
+                R.id.nav_home, R.id.nav_diary, R.id.nav_entry,R.id.nav_plan,R.id.nav_progress)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -65,12 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-
      private void checkIfSignedIn() {
         viewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
-                String message = "Welcome " + user.getDisplayName();
-              //  welcomeMessage.setText(message);
+              //nothing
             } else
                 startLoginActivity();
         });

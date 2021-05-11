@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="#FFDD75"
-    tools:context=".view.ExerciseFragment">
+    tools:context=".view.PlanFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:hint=" Height (kg)"
+                android:hint=" Height (cm)"
                 android:background="@drawable/edit_text_rounded"
                 android:ems="10"
                 android:inputType="number" />
@@ -66,7 +66,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:hint=" Weight (cm)"
+                android:hint=" Weight (kg)"
                 android:background="@drawable/edit_text_rounded"
                 android:ems="10"
                 android:inputType="number" />
@@ -119,75 +119,41 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/planLayout2"
-            android:layout_width="fill_parent"
-            android:layout_height="300dp"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-
-            <TextView
-                android:id="@+id/targetWeight"
-                android:layout_width="300dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_rounded_purple"
-                android:gravity="center"
-                android:text="TARGET WEIGHT"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/targetWeightText"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:id="@+id/dailyCalorie"
-                android:layout_width="300dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_rounded_purple"
-                android:gravity="center"
-                android:text="DAILY CALORIES"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/dailyCalorieText"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addNewUserInfo"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_orange"
-                android:text="CREATE NEW PLAN"
-                android:textColor="@color/white" />
-        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <LinearLayout
+        android:id="@+id/planLayout2"
+        android:layout_width="376dp"
+        android:layout_height="97dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
+        <TextView
+            android:id="@+id/targetWeightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+           />
 
+        <TextView
+            android:id="@+id/dailyCalorieText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+         />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

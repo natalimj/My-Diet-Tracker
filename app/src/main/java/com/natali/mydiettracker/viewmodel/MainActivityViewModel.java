@@ -15,7 +15,6 @@ import com.natali.mydiettracker.data.userInfo.UserInfoRepository;
 
 public class MainActivityViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
-    private ExerciseRepository exerciseRepository;
     private EntryRepository entryRepository;
     private UserInfoRepository userInfoRepository;
 
@@ -25,22 +24,6 @@ public class MainActivityViewModel extends AndroidViewModel {
         userRepository = UserRepository.getInstance(app);
         entryRepository=EntryRepository.getInstance(app);
         userInfoRepository=UserInfoRepository.getInstance(app);
-      exerciseRepository = ExerciseRepository.getInstance(app);
-      //  diaryEntryRepository=DiaryEntryRepository.getInstance();
-/*
-       exerciseRepository.insert(new Exercise("Cycling",5.5));
-        exerciseRepository.insert(new Exercise("Tennis",6.0));
-        exerciseRepository.insert(new Exercise("Running",11.5));
-        exerciseRepository.insert(new Exercise("Swimming",7.8));
-        exerciseRepository.insert(new Exercise("Aerobic",7.4));
-        exerciseRepository.insert(new Exercise("Hiking",4.5));
-
-        exerciseRepository.insert(new Exercise("Basketball",7.5));
-        exerciseRepository.insert(new Exercise("Walking",6.5));
-        exerciseRepository.insert(new Exercise("Golf",4.6));
-        exerciseRepository.insert(new Exercise("Jogging",9.3));
-
- */
     }
 
     public void init() {

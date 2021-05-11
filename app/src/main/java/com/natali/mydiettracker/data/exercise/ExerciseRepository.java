@@ -34,7 +34,6 @@ public class ExerciseRepository {
         return instance;
     }
 
-
     public void insert(Exercise exercise) {
         executorService.execute(() -> exerciseDao.insert(exercise));
     }
@@ -59,11 +58,4 @@ public class ExerciseRepository {
             }
         }
     }
-
-/*
-    public void deleteAllNotes() {
-        executorService.execute(noteDao::deleteAllNotes);
-    }
-
-     */
 }

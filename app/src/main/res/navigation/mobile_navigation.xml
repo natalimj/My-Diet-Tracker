@@ -12,24 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_food"
-        android:name="com.natali.mydiettracker.view.FoodFragment"
-        android:label="Food"
-        tools:layout="@layout/fragment_food" />
-
-    <fragment
-        android:id="@+id/nav_exercise"
-        android:name="com.natali.mydiettracker.view.ExerciseFragment"
-        android:label="Exercise"
-        tools:layout="@layout/fragment_exercise" />
-
-    <fragment
-        android:id="@+id/nav_water"
-        android:name="com.natali.mydiettracker.view.WaterFragment"
-        android:label="Water"
-        tools:layout="@layout/fragment_water" />
-
-    <fragment
         android:id="@+id/nav_plan"
         android:name="com.natali.mydiettracker.view.PlanFragment"
         android:label="Plan"
@@ -40,4 +22,16 @@
         android:name="com.natali.mydiettracker.view.DiaryFragment"
         android:label="Diary"
         tools:layout="@layout/fragment_diary" />
+
+    <fragment
+        android:id="@+id/nav_progress"
+        android:name="com.natali.mydiettracker.view.ProgressFragment"
+        android:label="Progress"
+        tools:layout="@layout/fragment_progress" />
+
+    <fragment
+        android:id="@+id/nav_entry"
+        android:name="com.natali.mydiettracker.view.EntryFragment"
+        android:label="Diary"
+        tools:layout="@layout/fragment_entry" />
 </navigation>

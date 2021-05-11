@@ -36,7 +36,6 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
         return entries.size();
     }
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name;

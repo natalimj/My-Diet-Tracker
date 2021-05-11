@@ -29,20 +29,4 @@ public class HomeViewModel extends AndroidViewModel {
         entryRepository=EntryRepository.getInstance(application);
         userRepository=UserRepository.getInstance(application);
     }
-
-  //  public LiveData<List<Entry>> getAllEntries(){  return entryRepository.getAllEntries(); }
-/*
-    //getting entries for today --food/exercise/water
-    public LiveData<List<Entry>> getFoodsForToday(){
-        return entryRepository.getFoodsForToday();
-    }
-
-    public LiveData<List<Entry>> getExercisesForToday(){
-        return entryRepository.getExercisesForToday();
-    }
-
-    public LiveData<Integer> getWaterForToday(){
-        return entryRepository.getWaterForToday();
-    }
-*/
 }

@@ -32,6 +32,5 @@ public class UserRepository {
     public void signOut() {
         AuthUI.getInstance()
                 .signOut(app.getApplicationContext());
-
     }
 }

@@ -51,18 +51,6 @@ public class ProgressFragment extends Fragment {
         textViewDate=root.findViewById(R.id.textViewDate);
         textViewDate.setText(progressViewModel.setDate());
 
-/*
-        progressViewModel.getWeightForGivenDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date())).observe(getViewLifecycleOwner(),
-                new Observer<Entry>() {
-                    public void onChanged(@Nullable Entry weightEntry) {
-                     weight=weightEntry.getCalorie();
-                    }
-        });
-
-
-
-*/
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +77,6 @@ public class ProgressFragment extends Fragment {
             if(weightList.isEmpty()){
             }
         });
-
         return root;
     }
 
