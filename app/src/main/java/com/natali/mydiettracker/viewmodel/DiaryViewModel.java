@@ -8,14 +8,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.natali.mydiettracker.data.entry.EntryRepository;
-import com.natali.mydiettracker.data.user.UserRepository;
 import com.natali.mydiettracker.data.userInfo.UserInfoRepository;
 import com.natali.mydiettracker.model.Entry;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 public class DiaryViewModel extends AndroidViewModel {
 
@@ -35,6 +31,7 @@ public class DiaryViewModel extends AndroidViewModel {
         entryRepository.setSelectedDate(strDate);
         selectedDate.setValue(strDate);
     }
+
 
     public LiveData<Entry> getWeight(){
        return entryRepository.getWeightForGivenDate(selectedDate.getValue());

@@ -13,12 +13,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.natali.mydiettracker.R;
-import com.natali.mydiettracker.viewmodel.HomeViewModel;
 import com.natali.mydiettracker.viewmodel.PlanViewModel;
 
 public class HomeFragment extends Fragment implements View.OnClickListener  {
 
-    private HomeViewModel homeViewModel;
     private PlanViewModel planViewModel;
 
     CardView card1;
@@ -30,12 +28,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         planViewModel = new ViewModelProvider(this).get(PlanViewModel.class);
 
-
-        //TODO: change names in home page
         card1=root.findViewById(R.id.cardView1);
         card2=root.findViewById(R.id.cardView2);
         card3=root.findViewById(R.id.cardView3);
@@ -73,7 +68,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                textView2.setText("TARGET WEIGHT: "+String.format("%.1f", target));
             }
         });
-
 
         return root;
     }

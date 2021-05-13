@@ -12,12 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.natali.mydiettracker.R;
 import com.natali.mydiettracker.model.Exercise;
+import com.natali.mydiettracker.model.Food;
 import com.natali.mydiettracker.viewmodel.EntryViewModel;
 
 
@@ -54,6 +57,9 @@ public class EntryFragment extends Fragment {
         waterButton=root.findViewById(R.id.addWater);
         exerciseButton=root.findViewById(R.id.addExercise);
 
+        editTextExercise=root.findViewById(R.id.exerciseName);
+        editTextDuration=root.findViewById(R.id.exerciseDuration);
+
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,12 +67,17 @@ public class EntryFragment extends Fragment {
             }
         });
 
-
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addWater();
+            }
+        });
+
+        exerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addExercise();
             }
         });
 
@@ -74,58 +85,21 @@ public class EntryFragment extends Fragment {
             textWaterAmount.setText(water.toString());
         });
 
-        entryViewModel.getSearchedFood().observe(getViewLifecycleOwner(), food-> {
-            if(food==null)
-                textWarning.setText("Please enter a valid food name");
-            else{
-                entryViewModel.addFoodToDiary(food);
-                textWarning.setText(food.getName()+" has been added to your list");
-
-                Toast.makeText(getContext(), food.getName()+" has been added to your list", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-        editTextExercise=root.findViewById(R.id.exerciseName);
-        editTextDuration=root.findViewById(R.id.exerciseDuration);
-
 
         entryViewModel.getExercises().observe(getViewLifecycleOwner(), exercises->{
-
             for(Exercise exercise:exercises){
                 categories.add(exercise.getExerciseName().toLowerCase());
             }
-
         });
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
         editTextExercise.setAdapter(dataAdapter);
 
-
-
         entryViewModel.getSearchedExercise().observe(getViewLifecycleOwner(), exercise-> {
-
-            textWarning.setText(exercise.getExerciseName()+" "+(String.valueOf(exercise.getCalorie())));
-
             entryViewModel.addExerciseToDiary(exercise,Integer.valueOf(editTextDuration.getText().toString().trim()));
-
-
             editTextDuration.setText("");
             editTextExercise.setText("");
-            textWarning.setText(exercise.getExerciseName()+" has been added to your list");
-            Toast.makeText(getContext(), exercise.getExerciseName()+" has been added to your list", Toast.LENGTH_SHORT).show();
-
         });
-
-        exerciseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                addExercise();
-            }
-        });
-
 
         return root;
     }
@@ -137,21 +111,28 @@ public class EntryFragment extends Fragment {
         }
         else{
             entryViewModel.searchForFoodByName(editText.getText().toString());
-            editText.setText("");
+             editText.setText("");
+
+            entryViewModel.getSearchedFood().observe(getViewLifecycleOwner(), new Observer<Food>(){
+                public void onChanged(@Nullable Food food) {
+                    if (food == null)
+                        textWarning.setText("Please enter a valid food name");
+                    else {
+                        entryViewModel.addFoodToDiary(food);
+                        Toast.makeText(getContext(), food.getName() + " has been added to your list", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
 
     }
 
     public void addWater(){
-
         entryViewModel.addWater();
-        textWarning.setText("A glass of water has been added to your list");
-        Toast.makeText(getContext(), "A glass of water has been added to your list", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(getContext(), "A glass of water has been added to your list", Toast.LENGTH_LONG).show();
     }
 
     public void addExercise() {
-
         if( editTextExercise.getText().length() == 0 || editTextExercise.getText().equals("") || editTextExercise.getText() == null){
             textWarning.setText("Please enter exercise name!!");
         }

@@ -75,7 +75,6 @@
                 android:background="@drawable/edit_text_rounded"
                 android:ems="10" />
 
-
             <EditText
                 android:id="@+id/exerciseDuration"
                 android:layout_width="wrap_content"
@@ -110,8 +109,6 @@
                 android:text="0"
                 android:textSize="35sp" />
 
-
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addWater"
                 android:layout_width="match_parent"
@@ -119,7 +116,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_rounded_purple"
-                android:text="ADD FOOD"
+                android:text="ADD WATER"
                 android:textColor="@color/white" />
 
 

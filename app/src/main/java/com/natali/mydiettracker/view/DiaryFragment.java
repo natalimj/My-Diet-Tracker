@@ -107,14 +107,6 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
         food.setText("");
         exercise.setText("");
 
-        strDate="";
-        diaryViewModel.getSelectedDate().observe(getViewLifecycleOwner(),new Observer<String>() {
-            public void onChanged(@Nullable String date) {
-                textView.setText(date);
-                strDate=date;
-            }
-        });
-
         diaryViewModel.getWeight().observe(getViewLifecycleOwner(),new Observer<Entry>() {
             public void onChanged(@Nullable Entry entry) {
                 if(entry!=null){
@@ -149,7 +141,6 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
                     exerciseList.clear();
                     for (Entry entry : entries) {
                         exerciseList.add(entry);
-                        System.out.println(entry.getName());
                     }
                     entryAdapter = new EntryAdapter(exerciseList);
                     recyclerView2.setAdapter(entryAdapter);
@@ -169,28 +160,42 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
             }
         });
 
-
         // find how many calories are left for today : TARGET CALORIES - FOOD + EXERCISE
         diaryViewModel.getDailyCalories().observe(getViewLifecycleOwner(), calorie-> {
-            totalCal=Double.valueOf(calorie);
-            diaryViewModel.getTotalFoodCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), foodCalorie-> {
-                if(foodCalorie!=null) {
-                    foodCal = Double.valueOf(foodCalorie);
-                }
-                diaryViewModel.getTotalExerciseCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), exerciseCalorie->{
-                    if(exerciseCalorie!=null) {
-                        exerciseCal=Double.valueOf(exerciseCalorie);
-                        if(strDate.equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(new Date())))
-                            textUserInfo.setText("TARGET CALORIES - FOOD + EXERCISE=\n"+(totalCal+exerciseCal-foodCal)+ "\n CALORIES LEFT FOR TODAY");
-                        else
-                            textUserInfo.setText("");
+            if(calorie!=null){
+                totalCal=Double.valueOf(calorie);
+                diaryViewModel.getTotalFoodCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), foodCalorie-> {
+                    if(foodCalorie!=null) {
+                        foodCal = Double.valueOf(foodCalorie);
                     }
+                    diaryViewModel.getTotalExerciseCalories(diaryViewModel.getSelectedDate().getValue()).observe(getViewLifecycleOwner(), exerciseCalorie->{
+                        if(exerciseCalorie!=null) {
+                            exerciseCal=Double.valueOf(exerciseCalorie);
+                            diaryViewModel.getSelectedDate().observe(getViewLifecycleOwner(),new Observer<String>() {
+                                public void onChanged(@Nullable String date) {
+                                    textView.setText(date);
+                                    if(date.equalsIgnoreCase(new SimpleDateFormat("dd-MM-yyyy").format(new Date())))
+                                    {
+                                        if((totalCal+exerciseCal-foodCal)>0){
+                                            String total=String.format("%.1f", (totalCal+exerciseCal-foodCal));
+                                            textUserInfo.setText("TARGET CALORIES - FOOD + EXERCISE=\n"+total+ "\n CALORIES LEFT FOR TODAY");
+                                        }
+                                        else{
+                                            textUserInfo.setText("OVER DAILY CALORIE LIMIT!!!!");
+                                        }
+                                    }
+                                    else
+                                        textUserInfo.setText("");
+                                }
+                            });
+                        }
+                    });
                 });
-            });
+         }
+            else{
+                textUserInfo.setText("Please Create A Diet Plan");
+            }
         });
-
     }
-
-
 }
 

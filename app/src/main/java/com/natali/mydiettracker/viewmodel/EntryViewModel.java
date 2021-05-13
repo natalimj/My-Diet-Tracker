@@ -40,11 +40,11 @@ public class EntryViewModel extends AndroidViewModel {
         foodRepository.searchForFoodByName(name);
     }
 
+
     public void addFoodToDiary(Food food){
         String userId=userRepository.getCurrentUser().getValue().getUid();
         entryRepository.insert(new Entry(userId,food.getName(),"food",food.getCalorie()));
     }
-
 
     public void addWater(){
         String userId=userRepository.getCurrentUser().getValue().getUid();
@@ -59,6 +59,7 @@ public class EntryViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Exercise>> getExercises(){
+
         return exerciseRepository.getAllExercises();
     }
 

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel =new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-        viewModel.init();
+       viewModel.init();
         checkIfSignedIn();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
      private void checkIfSignedIn() {
         viewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
-              //nothing
+              //do nothing
             } else
                 startLoginActivity();
         });
