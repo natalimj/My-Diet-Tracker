@@ -1,5 +1,7 @@
 # My-Diet-Tracker
 
+Youtube link : https://www.youtube.com/watch?v=np0scGQ3IV0
+
 MY DIET TRACKER
 
 DESCRIPTION:
@@ -8,7 +10,7 @@ Researches show that people who have a diet diary and log calories lose more wei
 
 This app calculates the user’s ideal weight and provides a personalized recommendation for calorie intake based on the user weight, height, age and gender. The users can log their weights in order to keep track of their weight changes.
 
-The users can keep track of their daily calorie intake and outtake by using their food diary/ daily food list and exercise log. The users also can add new food and exercise to the database and this data can be used by all users. 
+The users can keep track of their daily calorie intake and outtake by using their food diary/ daily food list and exercise log. 
 
 MOTIVATION
 
@@ -18,32 +20,28 @@ REQUIREMENTS
 
 MUST HAVE
 
-•	As a user, I want to calculate my ideal weight and daily calorie need so that I can set my diet goal.
+- [x]	As a user, I want to calculate my ideal weight and daily calorie need so that I can set my diet goal.
 
-•	As a user, I want to log my weight regularly so that I can keep track of my weight change.
+- [x]	As a user, I want to log my weight regularly so that I can keep track of my weight change.
 
-•	As a user, I want to add food to my daily food list in order to keep track of my food intake.
+- [x]	As a user, I want to add food to my daily food list in order to keep track of my food intake.
 
-•	As a user, I want to add my daily meals with their calories by using the food database.
+- [x]	As a user, I want to add my daily meals with their calories by using the food database.
 
 
 SHOULD HAVE
 
-•	As a user, I want to log my daily water consumption to the app and keep track of it.
+- [x]	As a user, I want to log my daily water consumption to the app and keep track of it.
 
-•	As a user, I want to see the remaining calories for the day, so that I can plan my next meals.
+- [x]	As a user, I want to see the remaining calories for the day, so that I can plan my next meals.
 
-•	As a user, I want to add my daily exercises to keep track of calories I burned. 
+- [x]	As a user, I want to add my daily exercises to keep track of calories I burned. 
 
 COULD HAVE
 
-•	As a user, I want to find diet recipes according to desired calorie range.
-
-•	As a user, I want to share diet recipes with other users.
-
-•	As a user, I want to add food to my daily food list by using their barcodes.
+- [ ]	As a user, I want to add food to my daily food list by using their barcodes.
 
 WON’T HAVE
 
-•	As a user, I want to see nutritional values(carbohydrates, fat, protein, minerals and vitamins) of the food I added to my daily food list.
+- [ ] As a user, I want to see nutritional values(carbohydrates, fat, protein, minerals and vitamins) of the food I added to my daily food list.
 
