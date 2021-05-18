@@ -178,7 +178,7 @@ public class DiaryFragment extends Fragment implements DatePickerDialog.OnDateSe
                                     {
                                         if((totalCal+exerciseCal-foodCal)>0){
                                             String total=String.format("%.1f", (totalCal+exerciseCal-foodCal));
-                                            textUserInfo.setText("TARGET CALORIES - FOOD + EXERCISE=\n"+total+ "\n CALORIES LEFT FOR TODAY");
+                                            textUserInfo.setText(total+ "\n CALORIES LEFT FOR TODAY");
                                         }
                                         else{
                                             textUserInfo.setText("OVER DAILY CALORIE LIMIT!!!!");
