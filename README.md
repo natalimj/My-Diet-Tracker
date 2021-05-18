@@ -10,7 +10,7 @@ Researches show that people who have a diet diary and log calories lose more wei
 
 This app calculates the user’s ideal weight and provides a personalized recommendation for calorie intake based on the user weight, height, age and gender. The users can log their weights in order to keep track of their weight changes.
 
-The users can keep track of their daily calorie intake and outtake by using their food diary/ daily food list and exercise log. T
+The users can keep track of their daily calorie intake and outtake by using their food diary/ daily food list and exercise log. 
 
 MOTIVATION
 
